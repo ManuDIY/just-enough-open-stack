@@ -6,7 +6,7 @@ REPOROOT=/var/www/html/mirrors
 
 # This script will create/update all the yum repos needed for installation
 
-COMPONENTS=${@-"base extras updates epel docker-ce-stable ansible ius elasticsearch-5.x"}
+COMPONENTS=${@-"base extras updates epel docker-ce-stable ansible ius elasticsearch-5.x treasuredata"}
   # ^^ This needs to be modified whenever any new components are added so they will go by default
 
 # Find path of this script
@@ -53,6 +53,13 @@ for COMPONENT in $COMPONENTS; do
 	elasticsearch-5.x)
 	    REPOPATH=$REPOROOT
 	    ;;
+        treasuredata)
+            REPOPATH=$REPOROOT/centos-7
+            ;;
+	*)
+	    echo "Undefined component [$COMPONENT]!"
+	    exit 1
+            ;;
     esac
     if [ ! -d $REPOPATH ]; then
 	mkdir -p $REPOPATH || exit 1
