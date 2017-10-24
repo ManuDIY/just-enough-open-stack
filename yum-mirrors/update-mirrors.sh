@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # BEGIN CONFIG OPTIONS
-YUMCONFIG=/home/oiab/mirrors.conf
 REPOROOT=/var/www/html/mirrors
 # END CONFIG OPTIONS
 
@@ -9,6 +8,20 @@ REPOROOT=/var/www/html/mirrors
 
 COMPONENTS=${@-"base extras updates epel docker-ce ansible ius elasticsearch-5.x"}
   # ^^ This needs to be modified whenever any new components are added so they will go by default
+
+# Find path of this script
+pushd `dirname $0` > /dev/null
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+popd > /dev/null
+
+# Generate mirrors.conf file
+YUMCONFIG=${SCRIPTPATH}/mirrors.conf
+cat <<EOF >$YUMCONFIG
+[main]
+reposdir=${SCRIPTPATH}/mirrors.repos
+gpgcheck=1
+http_caching=none
+EOF
 
 for COMPONENT in $COMPONENTS; do
     case $COMPONENT in
