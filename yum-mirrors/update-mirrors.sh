@@ -23,6 +23,10 @@ gpgcheck=1
 http_caching=none
 EOF
 
+# Clean up from previous runs so we sync correctly
+echo ">>> Cleaning up yum caches"
+yum -c $YUMCONFIG clean all
+
 for COMPONENT in $COMPONENTS; do
     case $COMPONENT in
 	base)
@@ -53,10 +57,13 @@ for COMPONENT in $COMPONENTS; do
     if [ ! -d $REPOPATH ]; then
 	mkdir -p $REPOPATH || exit 1
     fi
+    echo ">>> Running reposync on $COMPONENT"
     reposync -c $YUMCONFIG -d -p $REPOPATH -n --repoid=$COMPONENT || exit 2
     if [ -d $REPOPATH/$COMPONENT/repodata ]; then
+	echo ">>> Updating local repo metadata for $COMPONENT"
 	createrepo --update $REPOPATH/$COMPONENT || exit 3
     else
+	echo ">>> Creating local repo metadata for $COMPONENT"
 	createrepo $REPOPATH/$COMPONENT || exit 4
     fi
 done
