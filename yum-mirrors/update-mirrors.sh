@@ -6,7 +6,7 @@ REPOROOT=/var/www/html/mirrors
 
 # This script will create/update all the yum repos needed for installation
 
-COMPONENTS=${@-"base extras updates epel docker-ce ansible ius elasticsearch-5.x"}
+COMPONENTS=${@-"base extras updates epel docker-ce-stable ansible ius elasticsearch-5.x"}
   # ^^ This needs to be modified whenever any new components are added so they will go by default
 
 # Find path of this script
@@ -37,7 +37,7 @@ for COMPONENT in $COMPONENTS; do
 	epel)
 	    REPOPATH=$REPOROOT/centos-7
 	    ;;
-	docker-ce)
+	docker-ce-stable)
 	    REPOPATH=$REPOROOT
 	    ;;
 	ansible)
