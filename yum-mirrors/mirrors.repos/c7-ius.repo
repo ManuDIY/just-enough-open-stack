@@ -1,0 +1,26 @@
+[c7-ius]
+name=IUS Community Packages for Enterprise Linux 7 - x86_64
+baseurl=https://dl.iuscommunity.org/pub/ius/stable/CentOS/7/x86_64
+#mirrorlist=https://mirrors.iuscommunity.org/mirrorlist?repo=ius-centos7&arch=x86_64&protocol=http
+failovermethod=priority
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/IUS-COMMUNITY-GPG-KEY.txt
+
+[c7-ius-debuginfo]
+name=IUS Community Packages for Enterprise Linux 7 - x86_64 - Debug
+baseurl=https://dl.iuscommunity.org/pub/ius/stable/CentOS/7/x86_64/debuginfo
+#mirrorlist=https://mirrors.iuscommunity.org/mirrorlist?repo=ius-centos7-debuginfo&arch=x86_64&protocol=http
+failovermethod=priority
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/IUS-COMMUNITY-GPG-KEY.txt
+
+[c7-ius-source]
+name=IUS Community Packages for Enterprise Linux 7 - x86_64 - Source
+baseurl=https://dl.iuscommunity.org/pub/ius/stable/CentOS/7/SRPMS
+#mirrorlist=https://mirrors.iuscommunity.org/mirrorlist?repo=ius-centos7-source&arch=source&protocol=http
+failovermethod=priority
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/IUS-COMMUNITY-GPG-KEY.txt

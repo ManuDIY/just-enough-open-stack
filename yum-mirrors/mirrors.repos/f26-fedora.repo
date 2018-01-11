@@ -1,0 +1,25 @@
+[f26-fedora]
+name=Fedora 26 - $basearch
+failovermethod=priority
+#baseurl=http://download.fedoraproject.org/pub/fedora/linux/releases/$releasever/Everything/$basearch/os/
+metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-26&arch=x86_64
+enabled=1
+metadata_expire=7d
+repo_gpgcheck=0
+type=rpm
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-26-primary.txt
+skip_if_unavailable=False
+
+[f26-updates]
+name=Fedora 26 - x86_64 - Updates
+failovermethod=priority
+#baseurl=http://download.fedoraproject.org/pub/fedora/linux/updates/26/x86_64/
+metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f26&arch=x86_64
+enabled=1
+repo_gpgcheck=0
+type=rpm
+gpgcheck=1
+metadata_expire=6h
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-26-primary.txt
+skip_if_unavailable=False

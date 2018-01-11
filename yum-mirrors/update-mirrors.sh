@@ -6,7 +6,7 @@ REPOROOT=/var/www/html/mirrors
 
 # This script will create/update all the yum repos needed for installation
 
-COMPONENTS=${@-"base extras updates epel docker-ce-stable ansible ius elasticsearch-5.x treasuredata curator-3"}
+COMPONENTS=${@-"c7-base c7-extras c7-updates c7-epel c7-docker-ce-stable c7-ansible c7-ius elasticsearch-6.x c7-treasuredata c7-curator-3 f26-fedora f26-updates f26-docker-ce-stable"}
   # ^^ This needs to be modified whenever any new components are added so they will go by default
 
 # Find path of this script
@@ -29,36 +29,45 @@ yum -c $YUMCONFIG clean all
 
 for COMPONENT in $COMPONENTS; do
     case $COMPONENT in
-	base)
-	    REPOPATH=$REPOROOT/centos-7
+	c7-base)
+	    REPOPATH=$REPOROOT/centos/7
 	    ;;
-	extras)
-	    REPOPATH=$REPOROOT/centos-7
+	c7-extras)
+	    REPOPATH=$REPOROOT/centos/7
 	    ;;
-	updates)
-	    REPOPATH=$REPOROOT/centos-7
+	c7-updates)
+	    REPOPATH=$REPOROOT/centos/7
 	    ;;
-	epel)
-	    REPOPATH=$REPOROOT/centos-7
+	c7-epel)
+	    REPOPATH=$REPOROOT/centos/7
 	    ;;
-	docker-ce-stable)
+	c7-docker-ce-stable)
+	    REPOPATH=$REPOROOT/centos/7
+	    ;;
+	c7-ansible)
+	    REPOPATH=$REPOROOT/centos/7
+	    ;;
+	c7-ius)
+	    REPOPATH=$REPOROOT/centos/7
+	    ;;
+  c7-treasuredata)
+      REPOPATH=$REPOROOT/centos/7
+      ;;
+  c7-curator-3)
+	    REPOPATH=$REPOROOT/centos/7
+	    ;;
+  elasticsearch-6.x)
 	    REPOPATH=$REPOROOT
 	    ;;
-	ansible)
-	    REPOPATH=$REPOROOT/centos-7
-	    ;;
-	ius)
-	    REPOPATH=$REPOROOT/centos-7
-	    ;;
-	elasticsearch-5.x)
-	    REPOPATH=$REPOROOT
-	    ;;
-        treasuredata)
-            REPOPATH=$REPOROOT/centos-7
-            ;;
-        curator-3)
-	    REPOPATH=$REPOROOT/centos-7
-	    ;;
+  f26-fedora)
+      REPOPATH=$REPOROOT/fedora/26
+      ;;
+  f26-updates)
+      REPOPATH=$REPOROOT/fedora/26
+      ;;
+  f26-docker-ce-stable)
+    	REPOPATH=$REPOROOT/fedora
+    	;;
 	*)
 	    echo "Undefined component [$COMPONENT]!"
 	    exit 1
@@ -77,5 +86,3 @@ for COMPONENT in $COMPONENTS; do
 	createrepo $REPOPATH/$COMPONENT || exit 4
     fi
 done
-
-    
