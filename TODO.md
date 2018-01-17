@@ -1,5 +1,8 @@
 # TODO
 
  * Ansible playbooks for yum configuration
- * CI pipeline for Kolla docker image creation, which will serve from a publicly accessible registry
- * Better automation of network configuration across services (specifically DRP)
+ * Docker registry documentation
+ * Kolla install guide
+ * Digital Rebar Provisioning for deployment and lifecycle management of nodes
+ * Non-kubespray kubernetes deployment for bare metal
+ * OpenStack deployment on k8s (openstack-helm?)
