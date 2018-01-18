@@ -1,0 +1,34 @@
+---
+  - hosts: all
+    tasks:
+      - name: Install yum-utils
+        package:
+          name: yum-utils
+          state: latest
+      - name: Install ipmitool
+        package:
+          name: ipmitool
+          state: latest
+      - name: Install Docker CE
+        package:
+          name: docker-ce
+          state: latest
+      - name: Enable and start the docker service
+        service:
+          name: docker
+          enabled: yes
+          state: started
+      - name: Add docker registry config dir
+        file:
+          state: directory
+          path: /etc/docker/certs.d/{{ repo_host }}:443
+          owner: root
+          group: root
+          mode: 0755
+      - name: Add docker registry CA certificate
+        copy:
+          src: ca.pem
+          dest: /etc/docker/certs.d/{{ repo_host }}:443/ca.crt
+          owner: root
+          group: root
+          mode: 0644
