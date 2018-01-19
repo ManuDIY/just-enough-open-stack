@@ -1,0 +1,67 @@
+---
+ - name: Fedora 26 Primary Repo KEY
+   copy:
+     src: rpm-gpg/RPM-GPG-KEY-fedora-26-primary.txt
+     dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-26-primary
+     owner: root
+     group: root
+     mode: 0644
+ - name: Fedora 26 Base Repo
+   yum_repository:
+     name: fedora
+     file: fedora
+     description: Fedora 26 - x86_64
+     baseurl: http://{{ repo_host }}/mirrors/fedora/f26-fedora
+     enabled: yes
+     gpgcheck: yes
+     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-26-primary
+ - name: Fedora 26 Updates Repo
+   yum_repository:
+     name: updates
+     file: fedora-updates
+     description: Fedora 26 - x86_64 - Updates
+     baseurl: http://{{ repo_host }}/mirrors/fedora/f26-updates
+     enabled: yes
+     gpgcheck: yes
+     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-26-primary
+ - name: Fedora Docker CE Repo KEY
+   copy:
+     src: rpm-gpg/RPM-GPG-KEY-Fedora-Docker.txt
+     dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-Fedora-Docker
+     owner: root
+     group: root
+     mode: 0644
+ - name: Fedora 26 Docker CE Repo
+   yum_repository:
+     name: docker-ce
+     file: docker-ce-stable
+     description: Docker CE Packages for Fedora 26
+     baseurl: http://{{ repo_host }}/mirrors/fedora/f26-docker-ce-stable
+     enabled: yes
+     gpgcheck: yes
+     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Fedora-Docker
+ - name: ElasticSearch Repo Key
+   copy:
+     src: rpm-gpg/GPG-KEY-elasticsearch.txt
+     dest: /etc/pki/rpm-gpg/GPG-KEY-elasticsearch
+     owner: root
+     group: root
+     mode: 0644
+ - name: ElasticSearch 5.x Repo
+   yum_repository:
+     name: elasticsearch-5.x
+     file: elasticsearch
+     description: Elasticsearch repository for 5.x packages
+     baseurl: http://{{ repo_host }}/mirrors/elasticsearch-5.x
+     enabled: yes
+     gpgcheck: yes
+     gpgkey: file:///etc/pki/rpm-gpg/GPG-KEY-elasticsearch
+ - name: ElasticSearch Curator 3 Repo
+   yum_repository:
+     name: curator-3
+     file: elasticsearch
+     description: CentOS/RHEL 7 repository for Elasticsearch Curator 3.x packages
+     baseurl: http://{{ repo_host }}/mirrors/centos-7/curator-3
+     enabled: yes
+     gpgcheck: yes
+     gpgkey: file:///etc/pki/rpm-gpg/GPG-KEY-elasticsearch

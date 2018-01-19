@@ -1,0 +1,124 @@
+---
+- name: CentOS 7 Repo KEY
+  copy:
+    src: rpm-gpg/RPM-GPG-KEY-CentOS-7.txt
+    dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+    owner: root
+    group: root
+    mode: 0644
+- name: CentOS 7 Base Repo
+  yum_repository:
+    name: base
+    file: CentOS-Base
+    description: CentOS 7 - Base
+    baseurl: http://{{ repo_host }}/mirrors/centos-7/base
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+- name: CentOS 7 Updates Repo
+  yum_repository:
+    name: updates
+    file: CentOS-Base
+    description: CentOS 7 - Updates
+    baseurl: http://{{ repo_host }}/mirrors/centos-7/updates
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+- name: CentOS 7 Extras Repo
+  yum_repository:
+    name: extras
+    file: CentOS-Base
+    description: CentOS 7 - Extras
+    baseurl: http://{{ repo_host }}/mirrors/centos-7/extras
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+- name: CentOS 7 EPEL Repo KEY
+  copy:
+    src: rpm-gpg/RPM-GPG-KEY-EPEL-7.txt
+    dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+    owner: root
+    group: root
+    mode: 0644
+- name: CentOS 7 EPEL Repo
+  yum_repository:
+    name: epel
+    file: epel
+    description: Extra Packages for Enterprise Linux 7
+    baseurl: http://{{ repo_host }}/mirrors/centos-7/epel
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+- name: CentOS 7 Docker CE Repo KEY
+  copy:
+    src: rpm-gpg/RPM-GPG-KEY-CENTOS-DOCKER.txt
+    dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-CENTOS-DOCKER
+    owner: root
+    group: root
+    mode: 0644
+- name: CentOS 7 Docker CE Repo
+  yum_repository:
+    name: docker-ce
+    file: docker-ce-stable
+    description: Docker CE Packages for Enterprise Linux 7
+    baseurl: http://{{ repo_host }}/mirrors/docker-ce-stable
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CENTOS-DOCKER
+- name: CentOS 7 IUS Repo Key
+  copy:
+    src: rpm-gpg/IUS-COMMUNITY-GPG-KEY.txt
+    dest: /etc/pki/rpm-gpg/IUS-COMMUNITY-GPG-KEY
+    owner: root
+    group: root
+    mode: 0644
+- name: CentOS 7 IUS Repo
+  yum_repository:
+    name: ius
+    file: ius
+    description: IUS Community Packages for Enterprise Linux 7
+    baseurl: http://{{ repo_host }}/mirrors/centos-7/ius
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: file:///etc/pki/rpm-gpg/IUS-COMMUNITY-GPG-KEY
+- name: ElasticSearch Repo Key
+  copy:
+    src: rpm-gpg/GPG-KEY-elasticsearch.txt
+    dest: /etc/pki/rpm-gpg/GPG-KEY-elasticsearch
+    owner: root
+    group: root
+    mode: 0644
+- name: ElasticSearch 5.x Repo
+  yum_repository:
+    name: elasticsearch-5.x
+    file: elasticsearch
+    description: Elasticsearch repository for 5.x packages
+    baseurl: http://{{ repo_host }}/mirrors/elasticsearch-5.x
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: file:///etc/pki/rpm-gpg/GPG-KEY-elasticsearch
+- name: ElasticSearch Curator 3 Repo
+  yum_repository:
+    name: curator-3
+    file: elasticsearch
+    description: CentOS/RHEL 7 repository for Elasticsearch Curator 3.x packages
+    baseurl: http://{{ repo_host }}/mirrors/centos-7/curator-3
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: file:///etc/pki/rpm-gpg/GPG-KEY-elasticsearch
+- name: TreasureData Repo Key
+  copy:
+    src: rpm-gpg/GPG-KEY-td-agent.txt
+    dest: /etc/pki/rpm-gpg/GPG-KEY-td-agent
+    owner: root
+    group: root
+    mode: 0644
+- name: TreasureData (fluentd) Repo
+  yum_repository:
+    name: treasuredata
+    file: td
+    description: TreasureData
+    baseurl: http://{{ repo_host }}/mirrors/centos-7/treasuredata
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: file:///etc/pki/rpm-gpg/GPG-KEY-td-agent

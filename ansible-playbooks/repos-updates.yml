@@ -1,0 +1,21 @@
+---
+  - hosts: all
+    tasks:
+      - name: Setup repos to use local Fedora mirrors
+        include: f26-mirrors.yml
+        when: ansible_distribution == "Fedora"
+      - name: Setup repos to use local CentOS mirrors
+        include: repo-mirrors.yml
+        when: ansible_distribution == "CentOS"
+      - name: Clean all yum caches
+        command: yum clean all
+        # The yum module does not yet support this functionality
+      - name: Apply all updates
+        command: yum update -y
+        # The yum module does not yet support this functionality
+      - name: Setup repos to use local Fedora mirrors
+        include: f26-mirrors.yml
+        when: ansible_distribution == "Fedora"
+      - name: Setup repos to use local CentOS mirrors
+        include: repo-mirrors.yml
+        when: ansible_distribution == "CentOS"

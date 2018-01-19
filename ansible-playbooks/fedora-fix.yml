@@ -1,0 +1,8 @@
+---
+  - hosts: all
+    tasks:
+      - name: Ensure libselinux-python is installed for Fedora nodes
+        dnf:
+          name: 'http://{{ repo_host }}/mirrors/fedora/f26-fedora/Packages/l/libselinux-python-2.6-6.fc26.x86_64.rpm'
+          state: present
+        when: ansible_distribution == "Fedora"
